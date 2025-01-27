@@ -28,17 +28,17 @@ const app = express();
 
 // 🚀 Seguridad y Optimización
 app.use(cors({
-    origin: '*',  // Permitir acceso desde cualquier origen
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(helmet());             
-app.use(compression());        
+app.use(helmet());
+app.use(compression());
 
 // 🚦 Limitador de solicitudes
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, 
-  max: 500, 
+  windowMs: 5 * 60 * 1000,
+  max: 500,
   message: { error: 'Demasiadas solicitudes, inténtalo más tarde.' }
 });
 app.use(limiter);
@@ -70,10 +70,8 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-});
+// 🔥 Exporta la app para que Vercel la maneje
 module.exports = app;
+
 
 
