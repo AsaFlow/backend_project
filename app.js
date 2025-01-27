@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 require('dotenv').config();
 
+// Importar rutas
 const usuariosRoutes = require('./routes/usuariosRoutes');
 const incidenciasRoutes = require('./routes/incidenciasRoutes');
 const movDiarioRoutes = require('./routes/movDiarioRoutes');
@@ -69,5 +70,10 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// ⚠️ ⬇️ Elimina `app.listen()` y en su lugar exporta `app`
-module.exports = app;
+// 📌 Handler para Vercel
+const handler = (req, res) => {
+  app(req, res);
+};
+
+module.exports = handler;
+
