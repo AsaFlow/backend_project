@@ -70,10 +70,10 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// 📌 Handler para Vercel
-const handler = (req, res) => {
-  app(req, res);
-};
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+});
+module.exports = app;
 
-module.exports = handler;
 
